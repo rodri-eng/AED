@@ -20,7 +20,6 @@ inline int get_hash_value(long long key, int m) {
   return hash_value % m;
 }
 
-// 2. Para cadenas de texto (strings)
 inline int get_hash_value(const string &key, int m) {
   const int B = 311;
   const int MOD = 1e9 + 7;
@@ -97,14 +96,28 @@ template <typename key_type, typename value_type> struct my_map {
 };
 
 int main() {
-  my_map<int, int> nums(10);
-  nums[-5] = 100;
-  nums[0] = 50;
-  nums[42] = 200;
 
-  my_map<string, int> cadena(10);
-  cadena["El"] = 1;
-  cadena["Pepe"] = 2;
+  int n;
+  int T;
+
+  cin >> n >> T;
+
+  my_map<int, int> frec(2 * n);
+
+  for (int i = 0; i < n; ++i) {
+    int x;
+    cin >> x;
+    int complemento = T - x;
+
+    if (frec.has_key(complemento)) {
+      cout << "SI";
+      return 0;
+    }
+
+    frec[x] = 1;
+  }
+
+  cout << "NO";
 
   return 0;
 }

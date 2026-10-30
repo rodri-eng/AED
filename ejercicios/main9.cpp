@@ -3,26 +3,26 @@
 
 using namespace std;
 
-bool estaEnLaCola(queue<int> q, int valorBuscado)
+bool estaEnLaCola(queue<int> q, int val)
 {
     bool encontrado = false;
-    queue<int> colaAuxiliar;
+    queue<int> aux;
 
     while (!q.empty())
     {
         int actual = q.front();
-        if (actual == valorBuscado)
+        if (actual == val)
         {
             encontrado = true;
         }
-        colaAuxiliar.push(actual);
+        aux.push(actual);
         q.pop();
     }
 
-    while (!colaAuxiliar.empty())
+    while (!aux.empty())
     {
-        q.push(colaAuxiliar.front());
-        colaAuxiliar.pop();
+        q.push(aux.front());
+        aux.pop();
     }
 
     return encontrado;
@@ -34,16 +34,18 @@ bool estaEnLaCola(queue<int> q, int valorBuscado)
 #include <deque>
 #include <algorithm>
 
-int main() {
-    std::deque<int> dq = {10, 20, 30, 40};
-    int valorBuscado = 20;
+using namespace std;
 
-    auto it = std::find(dq.begin(), dq.end(), valorBuscado);
+int main() {
+    deque<int> dq = {10, 20, 30, 40};
+    int val = 20;
+
+    auto it = find(dq.begin(), dq.end(), val);
 
     if (it != dq.end()) {
-        std::cout << "El elemento esta en la cola.\n";
+        cout << "Existe";
     } else {
-        std::cout << "El elemento no esta.\n";
+        cout << "No existe";
     }
 
     return 0;
